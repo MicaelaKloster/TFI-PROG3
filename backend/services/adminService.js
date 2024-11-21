@@ -127,5 +127,39 @@ const AdminService = {
     },
 
     // Borrar usuario
-    
-}
+    borrarUsuario: async (idUsuario) => {
+        try{
+            // Obtener el usuario de la base de datos
+            const [usuario] = await AdminDB.obtenerUsuarioPorId(idUsuario);
+
+            if(!usuario) {
+                return {error: "Usuario a eliminar no encontrado", status: 404};
+            }
+
+            // Verificar si el usuario esta desactivado
+            if(usuario.activo === 0){
+                return {error: "El usuario ya estaba desactivado", status: 404};
+            }
+
+            // Desactivar (borrar logicamente) el usuario
+            await AdminDB.borrarUsuarioDB(idUsuario);
+
+            // Determinar el tipo de usuario
+            let tipoUsuario;
+            if(usuario.idTipoUsuario === 3){
+                tipoUsuario = "cliente";
+            }else if (usuario.idTipoUsuario === 2){
+                tipoUsuario = "empleado";
+            }else{
+                tipoUsuario= "usuario";
+            }
+
+            return {message: `Se ha desactivado el ${tipoUsuario} correctamente.`};
+        }catch (error){
+            console.error("Error en AdminService.borrarUsuario: ", error);
+            throw new Error(`${error.message}`);
+        }
+    },
+};
+
+export default AdminService;
