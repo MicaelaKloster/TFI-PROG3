@@ -1,4 +1,4 @@
-import redisClient from '../index.js';
+import redisClient from "../index.js";
 import AdminDB from "../database/adminDB.js";
 import bcrypt from "bcrypt";
 
