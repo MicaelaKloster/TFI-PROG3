@@ -2,7 +2,7 @@ import AdminService from "../services/adminService.js";
 
 const AdminController = {
 
-    getAllEmpleaos: async (req,res) => {
+    getAllEmpleados: async (req,res) => {
         try{
             const empleados = await AdminService.getAllEmpleados();
             res.json(empleados);
