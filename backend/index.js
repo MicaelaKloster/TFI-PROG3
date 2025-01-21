@@ -6,9 +6,13 @@ import { fileURLToPath } from 'url';
 import dotenv from 'dotenv';
 import redis from 'redis';
 import passport from 'passport';
+import initializePassport from './config/passportConfig.js';
+import autorizarUsuario from './middleware/autorizarUsuario.js';
+import contentTypeMiddleware from './middleware/contentTypeMiddleware.js';
 
 
 // Importar rutas
+import authRouter from './routes/authRoutes.js';
 import routerAdmin from './routes/adminRoutes.js';
 
 // Cargar variables de entorno

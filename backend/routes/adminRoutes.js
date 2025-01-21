@@ -9,12 +9,12 @@ router.get("/empleados", AdminController.getAllEmpleados);
 router.get("/clientes", AdminController.getAllClientes);
 router.post(
     "/usuario",
-    upload.single('imagen'),
+    //upload.single('imagen'),
     AdminController.crearUsuario
 );
 router.patch(
     "/actualizar-usuario/:idUsuarioModificado",
-    upload.single('imagen'),
+    //upload.single('imagen'),
     AdminController.actualizarUsuario
 );
 router.put("/borrar-usuario/:idUsuario", AdminController.borrarUsuario);
