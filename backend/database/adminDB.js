@@ -9,7 +9,7 @@ const AdminDB = {
             );
             return rows;
         }catch (error){
-            conasole.error("Error al obtener usuarios: ", error);
+            console.error("Error al obtener usuarios: ", error);
             throw error;
         }
     },
