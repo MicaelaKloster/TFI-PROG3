@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Cambio de Estado</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #f8f9fa;
+      margin: 0;
+      padding: 0;
+    }
+    .container {
+      max-width: 600px;
+      margin: 30px auto;
+      padding: 20px;
+      background-color: #fff;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      border-top: 6px solid #000;
+    }
+    h1 {
+      color: #333;
+      text-align: center;
+      margin-bottom: 20px;
+      font-size: 28px;
+    }
+    h4 {
+      color: #444;
+      font-size: 18px;
+      margin-bottom: 10px;
+    }
+    p {
+      color: #555;
+      font-size: 16px;
+      line-height: 1.6;
+    }
+    .button {
+      display: inline-block;
+      padding: 12px 20px;
+      background-color: #000;
+      color: #fff;
+      text-decoration: none;
+      font-size: 16px;
+      border-radius: 5px;
+      margin-top: 20px;
+      text-align: center;
+    }
+    .footer {
+      margin-top: 30px;
+      text-align: center;
+      color: #999;
+      font-size: 14px;
+    }
+    .footer p {
+      margin: 5px 0;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Notificación de Cambio de Estado del Reclamo</h1>
+    <h4>Estimado/a {{cliente}},</h4>
+    <p>Nos comunicamos para informarle que su reclamo de <strong>{{asunto}}</strong> ha cambiado de estado. Ahora está en el estado: <strong>{{estadoReclamo}}</strong>.</p>        
+    <p>Si tiene alguna pregunta, no dude en ponerse en contacto con nosotros.</p>
+    <a href="https://su-sitio-web.com/contacto" class="button">Contactar Soporte</a>
+    <div class="footer">
+      <p>Atentamente,</p>
+      <p><strong>Servicio de Atención al Cliente</strong></p>
+      <p>No responder a este correo.</p>
+    </div>
+  </div>
+</body>
+</html>
