@@ -15,7 +15,7 @@ import contentTypeMiddleware from './middleware/contentTypeMiddleware.js';
 import authRouter from './routes/authRoutes.js';
 import routerAdmin from './routes/adminRoutes.js';
 import routerOficina from './routes/oficinaRoutes.js';
-
+import routerReclamo from './routes/reclamoRoutes.js';
 
 // Cargar variables de entorno
 dotenv.config();
