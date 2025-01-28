@@ -20,6 +20,7 @@ import routerReclamo from './routes/reclamoRoutes.js';
 import routerReclamoOficina from './routes/reclamoOficinaRoutes.js';
 import routerReclamoTipo from './routes/reclamoTipoRoutes.js';
 import routerInforme from './routes/informeRoutes.js';
+import routerEstadisticas from './routes/estadisticasRoutes.js';
 
 // Cargar variables de entorno
 dotenv.config();
