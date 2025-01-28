@@ -14,10 +14,12 @@ import contentTypeMiddleware from './middleware/contentTypeMiddleware.js';
 // Importar rutas
 import authRouter from './routes/authRoutes.js';
 import routerAdmin from './routes/adminRoutes.js';
+import routerCliente from './routes/clienteRoutes.js';
 import routerOficina from './routes/oficinaRoutes.js';
 import routerReclamo from './routes/reclamoRoutes.js';
 import routerReclamoOficina from './routes/reclamoOficinaRoutes.js';
 import routerReclamoTipo from './routes/reclamoTipoRoutes.js';
+import routerInforme from './routes/informeRoutes.js';
 
 // Cargar variables de entorno
 dotenv.config();
