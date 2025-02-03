@@ -45,7 +45,7 @@ const loginService = async (correoElectronico, contrasenia) => {
     const token = jwt.sign(payload, process.env.JWT_SECRET, {expiresIn: tokenExpiracion});
 
     // Guarda ek último tiempo de login
-    ultimpoTiempo[correoElectronico] = tiempoActual;
+    ultimoTiempo[correoElectronico] = tiempoActual;
 
     return {
         success: true,

@@ -47,7 +47,7 @@ const ClienteDB = {
 
     registrarClienteDB: async (nombre, apellido, correoElectronico, contrasenia, imagen) => {
         try{
-            const [result] = await pool.query(`INSERT INTO usuarios (nombre, apellido, correoElectronico, contrasenia, idTipoUsuario, imagen, activo) VALUES (?, ?, ?, ?, ?, ?, ?,)`, [nombre, apellido, correoElectronico, contrasenia, 3, imagen, 1]);
+            const [result] = await pool.query(`INSERT INTO usuarios (nombre, apellido, correoElectronico, contrasenia, idTipoUsuario, imagen, activo) VALUES (?, ?, ?, ?, ?, ?, ?)`, [nombre, apellido, correoElectronico, contrasenia, 3, imagen, 1]);
             return result.insertId;
 
         }catch(error){
