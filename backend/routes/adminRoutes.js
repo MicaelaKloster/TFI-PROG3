@@ -18,5 +18,7 @@ router.patch(
     AdminController.actualizarUsuario
 );
 router.put("/borrar-usuario/:idUsuario", AdminController.borrarUsuario);
+router.get('/usuarios-por-oficina', AdminController.obtenerUsuariosPorOficina);
+
 
 export default router;

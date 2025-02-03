@@ -81,6 +81,16 @@ const AdminController = {
         }
     },
 
+    obtenerUsuariosPorOficina: async (req, res) => {
+        try{
+            const result = await AdminService.obtenerUsuariosPorOficina();
+            res.status(200).json(result);
+
+        }catch(error){
+            console.error("Error en AdminController.obtenerUsuariosPorOficina: ", error);
+            res.status(500).json({error: "Error al obtener datos de usuarios por oficina."});
+        }
+    },
 };
 
 export default AdminController;

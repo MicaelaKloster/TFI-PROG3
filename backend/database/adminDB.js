@@ -95,6 +95,18 @@ const AdminDB = {
             throw error;
         }
     },
+
+    // Estadística de cantidad de usuarios por oficina
+    obtenerUsuariosPorOficinaDB: async () => {
+        try{
+            const [result] = await pool.query("CALL obtenerUsuariosPorOficina()");
+            return result[0]; // Retorna la lista de oficinas con cantidad de usuarios
+            
+        }catch(error){
+            console.error("Error al obtener usuarios por oficina: ", error);
+            throw error;
+        }
+    },
 };
 
 export default AdminDB;

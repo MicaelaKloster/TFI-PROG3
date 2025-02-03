@@ -57,6 +57,26 @@ const ClienteController = {
             }
         }
     },
+
+    registrarCliente: async (req, res) => {
+        const { nombre, apellido, correoElectronico, contrasenia } = req.body;
+        const imagen = req.file ? req.file.filename : null;
+
+        try{
+            const nuevoCliente = await ClienteService.registrarCliente(
+                nombre,
+                apellido,
+                correoElectronico,
+                contrasenia,
+                imagen
+            );
+
+            res.status(200).json(nuevoCliente);
+            
+        }catch(error){
+            res.status(400).json({error: error.message});
+        }
+    },
 };
 
 export default ClienteController;

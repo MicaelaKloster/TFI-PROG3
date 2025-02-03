@@ -60,6 +60,40 @@ const ClienteService = {
             ...datosCliente
         };
     },
+
+    registrarCliente: async (nombre, apellido, correoElectronico, contrasenia, imagen) => {
+        try{
+            // Verificar si el correo ya esta registrado
+            const correoExiste = await ClienteDB.verificarCorreoDB(correoElectronico);
+            if(correoExiste){
+                throw new Error("El correo electrónico ya esta registrado.");
+            }
+
+            // Hashear contraseña
+            const hashedPassword = await bcrypt.hash(contrasenia, 10);
+
+            // Registrar el cliente en la base de datos
+            const idUsuario = await ClienteDB.registrarClienteDB(
+                nombre,
+                apellido,
+                correoElectronico,
+                hashedPassword,
+                imagen
+            );
+
+            return {
+                message: "Cliente registrado con éxito",
+                idUsuario,
+                nombre,
+                apellido,
+                correoElectronico,
+            };
+
+        }catch(error){
+            console.error("Error en ClienteService.registrarCliente: ", error);
+            throw new Error(error.message);
+        }
+    },
 };
 
 

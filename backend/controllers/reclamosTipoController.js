@@ -1,4 +1,4 @@
-import ReclamosTipoService from "../services/reclamosTipoServices.js";
+import ReclamosTipoService from "../services/reclamosTipoService.js";
 
 const ReclamosTipoController = {
     getAllReclamosTipo: async (req, res) => {

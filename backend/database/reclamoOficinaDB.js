@@ -32,7 +32,7 @@ const ReclamoOficinaDB = {
             if(estadoNumerico === 3){
                 query+= ', fechaCancelado = NOW()';
             }else if(estadoNumerico === 4){
-                query += ', fechaFinalizado = NOW() idUsuarioFinalizador = ?';
+                query += ', fechaFinalizado = NOW(), idUsuarioFinalizador = ?';
                 valores.push(idEmpleado); // Agrega idEmpleado solo si esl estado es finalizado (4)
             }
 

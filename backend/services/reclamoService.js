@@ -18,7 +18,7 @@ const ReclamoService = {
 
     crearReclamo: async (asunto, descripcion, idUsuarioCreador, idReclamoTipo) => {
         try{
-            if(!asunto || !descripcion || !idReclamoTipo){
+            if(!asunto || !descripcion || !idReclamoTipo ){
                 const errores = [];
                 if(!asunto) errores.push("asunto");
                 if(!descripcion) errores.push("descripcion");
@@ -97,6 +97,26 @@ const ReclamoService = {
             
         }catch(error){
             throw new Error(error.message);
+        }
+    },
+
+    getReclamosPaginados: async (page = 1, pageSize = 10) => {
+        try{
+            const offset = (page - 1) * pageSize;
+            const { reclamos, total } = await ReclamoDB.obtenerReclamosPaginadosDB(offset,pageSiza);
+            const totalPages = Math.ceil(total / pageSize);
+
+            return {
+                page,
+                pageSize,
+                totalReclamos: total,
+                totalPages,
+                reclamos,
+            };
+            
+        }catch(error){
+            console.error("Error al obtener reclamos paginados: ", error);
+            throw new Error("No se pudo obtener la lista de reclamos.");
         }
     },
 };

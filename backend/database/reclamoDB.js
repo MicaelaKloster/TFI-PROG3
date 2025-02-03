@@ -88,7 +88,22 @@ const ReclamoDB = {
         }catch(error){
             throw new Error("Error al obtener el estado del reclamo: " + error.message);
         }
-    }
+    },
+
+    // Obtener reclamos paginados
+    obtenerReclamosPaginadosDB: async (offset, limit) => {
+        try{
+            const [reclamos] = await pool.query(`SELECT * FROM reclamos ORDER BY fechaCreado DESC LIMIT ? OFFSET ?`, [limit, offset]);
+
+            const [[{total}]] = await pool.query(`SELECT COUNT(*) AS total FROM reclamos`);
+
+            return { reclamos, total };
+
+        }catch(error){
+            console.error("Error al obtener reclamos con paginación: ", error);
+            throw error;
+        }
+    },
 };
 
 export default ReclamoDB;

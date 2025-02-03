@@ -62,6 +62,19 @@ const ReclamoController = {
         }
     },
 
+    getReclamosPaginados: async (req, res) => {
+        // Recibe parametros de paginación
+        const { page = 1, pageSize = 10 } = req.query;
+
+        try{
+            const result = await ReclamoService.getReclamosPaginados(Number(page), Number(pageSize));
+            res.status(200).json(resultado);
+            
+        }catch(error){
+            console.error("Error en ReclamoController.getReclamosPaginados: ", erorr);
+            res.status(500).json({ error: "Error al obtener los reclamos."});
+        }
+    },
 };
 
 

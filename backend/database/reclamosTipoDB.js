@@ -53,7 +53,7 @@ const ReclamosTipoDB = {
             return rows.insertId;
 
         }catch(error){
-            console.error("Error al crear tipo de reclamo: ", error);.
+            console.error("Error al crear tipo de reclamo: ", error);
             throw error;
         }
     },

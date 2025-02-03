@@ -25,6 +25,7 @@ const AdminService = {
     getAllEmpleados: function () {
         return this.getUsuariosByTipo(2, "empleados");
     },
+
     getAllClientes: function () {
         return this.getUsuariosByTipo(3, "clientes");
     },
@@ -158,6 +159,26 @@ const AdminService = {
         }catch (error){
             console.error("Error en AdminService.borrarUsuario: ", error);
             throw new Error(`${error.message}`);
+        }
+    },
+
+    // Estadisticas
+    obtenerUsuariosPorOficina: async () => {
+        try{
+            const datos = await AdminDB.obtenerUsuariosPorOficinaDB();
+
+            if(!datos || datos.length === 0){
+                throw new Error("No hay datos disponibles sobre usuarios por oficina.");
+            }
+
+            return{
+                datosOficinas: datos.lenght,
+                oficinas: datos,
+            }
+            
+        }catch(error){
+            console.error("Error en AdminService.obtenerUsuariosPorOficina: ", error);
+            throw error;
         }
     },
 };

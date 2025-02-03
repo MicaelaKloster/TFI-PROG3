@@ -15,7 +15,7 @@ const OficinasDB = {
     // Función para obtener empleados por oficina
     getEmpleadosByOficinaDB: async (idOficina) => {
         try{
-            const query = `SELECT u.nombre, u.apellido, u.idUsuario, FROM usuarios AS u INNER JOIN usuariosOficinas AS uo ON u.idUsuario = uo.idUsuario WHERE uo.idOficina = ? AND uo.activo = 1`;
+            const query = `SELECT u.nombre, u.apellido, u.idUsuario FROM usuarios AS u INNER JOIN usuariosOficinas AS uo ON u.idUsuario = uo.idUsuario WHERE uo.idOficina = ? AND uo.activo = 1`;
             const [rows] = await pool.query(query,[idOficina]);
             return rows;
         }catch(error){
@@ -28,7 +28,8 @@ const OficinasDB = {
     buscarEmpleadoDB: async (idUsuario) => {
         try{
             const [[rows]] = await pool.query("SELECT * FROM usuarios WHERE idUsuario = ?", [idUsuario]);
-            return rows;
+            //return rows; retorna undefined si no lo encuentra y puede ocasionar errores en asignarEmpleadoAOficina
+            return rows.length > 0 ? rows[0] : null; // Devuelve null si no encuentra el usuario
         }catch(error){
             console.error("Error al buscar empleado en la base de datos: ", error);
             throw error;

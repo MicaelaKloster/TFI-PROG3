@@ -45,8 +45,16 @@ const oficinaService = {
 
     asignarEmpleadoAOficina: async (idOficina, idUsuario) => {
         try{
+            // Conversion de idOficina y idUsuario a números ya que vienen como string desde req.params
+            const idUsuarioNum = Number(idUsuario);
+            const idOficinaNum = Number(idOficina);
+
+            if(isNan(idUsuarioNum)||isNan(idOficinaNum)){
+                throw new Error("El ID de usuario o el ID oficina no son válidos.");
+            }
+
             // Verificar si el empleado existe y cumple las condiciones
-            const existeEmpleado = await oficinas.buscarEmpleadoDB(idUsuario);
+            const existeEmpleado = await oficinas.buscarEmpleadoDB(idUsuarioNum);
 
             if(existeEmpleado.length === 0){
                 throw new Error("Empleado no encontrado");
@@ -61,10 +69,10 @@ const oficinaService = {
             }
 
             // Obtener los empleados ya asignados a la oficina
-            const empleados = await oficinas.getEmpleadosByOficinaDB(idOficina);
+            const empleados = await oficinas.getEmpleadosByOficinaDB(idOficinaNum);
 
             // Verificar si el empleado se encuentra ya asignado a esa oficina
-            const idEmpleadoNumero = Number(idUsuario); // Se convierte el idUsuario a número ya que viene como string
+            const idEmpleadoNumero = idUsuarioNum;
 
             // Comparacion del id del empleado (usuario)
             const asignado = empleados.some(empleado => empleado.idUsuario === empleado.idEmpleadoNumero);
@@ -73,7 +81,7 @@ const oficinaService = {
             }
 
             //Agregar enmpleado a oficina
-            const idAsignado = await oficinas.asignarEmpleadoDB(idOficina, idUsuario);
+            const idAsignado = await oficinas.asignarEmpleadoDB(idOficinaNum, idUsuarioNum);
 
             return idAsignado;
 

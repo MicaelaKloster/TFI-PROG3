@@ -23,4 +23,8 @@ router.patch(
     ClienteController.actualizarCliente
 );
 
+// Ruta pública para registrar un cliente
+router.post('/registro', upload.single("imagen"), ClienteController.registrarCliente);
+
+
 export default router;
