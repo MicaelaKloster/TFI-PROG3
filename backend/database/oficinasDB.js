@@ -28,8 +28,8 @@ const OficinasDB = {
     buscarEmpleadoDB: async (idUsuario) => {
         try{
             const [[rows]] = await pool.query("SELECT * FROM usuarios WHERE idUsuario = ?", [idUsuario]);
-            //return rows; retorna undefined si no lo encuentra y puede ocasionar errores en asignarEmpleadoAOficina
-            return rows.length > 0 ? rows[0] : null; // Devuelve null si no encuentra el usuario
+            return rows; //retorna undefined si no lo encuentra y puede ocasionar errores en asignarEmpleadoAOficina
+            //return rows.length > 0 ? rows[0] : null; // Devuelve null si no encuentra el usuario
         }catch(error){
             console.error("Error al buscar empleado en la base de datos: ", error);
             throw error;
@@ -40,7 +40,7 @@ const OficinasDB = {
     asignarEmpleadoDB: async (idOficina, idUsuario) =>{
         try{
             const query = "INSERT INTO usuariosOficinas(idUsuario, idOficina, activo) VALUES (?,?,1)";
-            const [result] = await pool.query(query,[idOficina, idUsuario]);
+            const [result] = await pool.query(query,[idUsuario, idOficina]);
             return result.insertId;
         }catch(error){
             console.error("Error al asignar empleado a oficina: ", error);

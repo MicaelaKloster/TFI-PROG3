@@ -30,12 +30,12 @@ const oficinaService = {
                 return JSON.parse(cachedData);
             }
 
-            const rows = await oficinas.getEmpleadoByOficinaDB(idOficina);
+            const rows = await oficinas.getEmpleadosByOficinaDB(idOficina);
             if(rows.length === 0){
                 throw new Error("Oficina sin empleados asignados");
             }
 
-            await redisClient.setEx(cachedKey, 3600, JSON.stringify(rows));
+            await redisClient.setEx(cacheKey, 3600, JSON.stringify(rows));
             return rows;
 
         }catch(error){
@@ -45,16 +45,8 @@ const oficinaService = {
 
     asignarEmpleadoAOficina: async (idOficina, idUsuario) => {
         try{
-            // Conversion de idOficina y idUsuario a números ya que vienen como string desde req.params
-            const idUsuarioNum = Number(idUsuario);
-            const idOficinaNum = Number(idOficina);
-
-            if(isNan(idUsuarioNum)||isNan(idOficinaNum)){
-                throw new Error("El ID de usuario o el ID oficina no son válidos.");
-            }
-
             // Verificar si el empleado existe y cumple las condiciones
-            const existeEmpleado = await oficinas.buscarEmpleadoDB(idUsuarioNum);
+            const existeEmpleado = await oficinas.buscarEmpleadoDB(idUsuario);
 
             if(existeEmpleado.length === 0){
                 throw new Error("Empleado no encontrado");
@@ -69,21 +61,17 @@ const oficinaService = {
             }
 
             // Obtener los empleados ya asignados a la oficina
-            const empleados = await oficinas.getEmpleadosByOficinaDB(idOficinaNum);
+            const empleados = await oficinas.getEmpleadosByOficinaDB(idOficina);
 
-            // Verificar si el empleado se encuentra ya asignado a esa oficina
-            const idEmpleadoNumero = idUsuarioNum;
-
-            // Comparacion del id del empleado (usuario)
-            const asignado = empleados.some(empleado => empleado.idUsuario === empleado.idEmpleadoNumero);
-            if(asignado){
-                throw new Error("El empleado ya se encuentra asignado a esa oficina");
+            // Verificar si el empleado ya está asignado a la oficina
+            const idUsuarioNumero = Number(idUsuario); // Lo convierto en numero ya que viene como string para realizar la comparación
+            const yaAsignado = empleados.some(empleado => empleado.idUsuario === idUsuarioNumero);
+            if (yaAsignado) {
+                throw new Error("El empleado ya está asignado en la oficina");
             }
-
-            //Agregar enmpleado a oficina
-            const idAsignado = await oficinas.asignarEmpleadoDB(idOficinaNum, idUsuarioNum);
-
-            return idAsignado;
+            // Agregar empleado a oficina
+            const idAsignacion = await oficinas.asignarEmpleadoDB(idOficina, idUsuario);
+            return idAsignacion;
 
         }catch(error){
             throw new Error("Error al asignar empleado a oficina: " + error.message);

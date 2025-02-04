@@ -3,7 +3,7 @@ import NotificacionEmail from "./notificacionEmailService.js";
 import ReclamoDB from "../database/reclamoDB.js";
 
 const ReclamoOficinaService = {
-    listarReclamosPorOficinaDB: async (idEmpleado) => {
+    listarReclamosPorOficina: async (idEmpleado) => {
         try{
             const reclamos = await ReclamoOficinaDB.obtenerReclamosPorOficinaDB(idEmpleado);
 

@@ -5,7 +5,7 @@ const ReclamoOficinaController = {
     listarReclamosOficina: async (req, res) => {
         const { idUsuario } = req.user;
         try{
-            const reclamos = await ReclamoOficinaService.listarReclamoOficina(idUsuario);
+            const reclamos = await ReclamoOficinaService.listarReclamosPorOficina(idUsuario);
             res.json({reclamos});
 
         }catch(error){

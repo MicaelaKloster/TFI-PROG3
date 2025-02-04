@@ -24,9 +24,9 @@ const OficinaController = {
     },
 
     asignarEmpleadoAOficina: async (req,res) => {
-        const { idUsuario, idOficina } = req.params;
+        const { idOficina, idUsuario } = req.params;
         try{
-            const idAsignado = await oficinaService.asignarEmpleadoAOficina(idUsuario, idOficina);
+            const idAsignado = await oficinaService.asignarEmpleadoAOficina(idOficina, idUsuario);
             res.status(200).json({
                 id: idAsignado,
                 message: "Empleado asignado correctamente a la oficina",

@@ -4,7 +4,12 @@ const ReclamoOficinaDB = {
     // Función para obtener los reclamos de la oficina del empleado
     obtenerReclamosPorOficinaDB: async (idEmpleado) => {
         try{
-            const [reclamos] = await pool.query(`SELECT o.nombre, r.asunto, r.descripcion, r.fechaCreado FROM usuariosOficinas uo JOIN oficinas o ON o.idReclamoTipo = rt.idReclamoTipo JOIN reclamos r on rt.idReclamosTipo = r.idReclamoTipo WHERE uo.idUsuario = ?`, [idEmpleado]);
+            const [reclamos] = await pool.query(`SELECT o.nombre, r.asunto, r.descripcion, r.fechaCreado
+                                                FROM usuariosOficinas uo
+                                                JOIN oficinas o ON uo.idOficina = o.idOficina
+                                                JOIN reclamosTipo rt ON o.idReclamoTipo = rt.idReclamoTipo
+                                                JOIN reclamos r ON rt.idReclamoTipo = r.idReclamoTipo
+                                                WHERE uo.idUsuario = ?`, [idEmpleado]);
             return reclamos;
 
         }catch(error){
