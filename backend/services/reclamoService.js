@@ -36,7 +36,7 @@ const ReclamoService = {
             const idReclamoEstado = 1; // Estado inicial de un reclamo (pendiente)
 
             // Crear el reclamo en la base de datos
-            const idReclamo = await ReclamoDB.crearRelamoDB({
+            const idReclamo = await ReclamoDB.crearReclamoDB({
                 asunto,
                 descripcion,
                 fechaCreado,
@@ -103,7 +103,7 @@ const ReclamoService = {
     getReclamosPaginados: async (page = 1, pageSize = 10) => {
         try{
             const offset = (page - 1) * pageSize;
-            const { reclamos, total } = await ReclamoDB.obtenerReclamosPaginadosDB(offset,pageSiza);
+            const { reclamos, total } = await ReclamoDB.obtenerReclamosPaginadosDB(offset,pageSize);
             const totalPages = Math.ceil(total / pageSize);
 
             return {

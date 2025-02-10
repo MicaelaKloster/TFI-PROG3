@@ -32,7 +32,7 @@ const ReclamoDB = {
     // Crear nuevo reclamo y devolver su ID
     crearReclamoDB: async (reclamoData) => {
         try{
-            const [result] = await pool.query("INSERT INTO reclamos SET ?", [reclamosData]);
+            const [result] = await pool.query("INSERT INTO reclamos SET ?", [reclamoData]);
             return result.insertId;
 
         }catch(error){
