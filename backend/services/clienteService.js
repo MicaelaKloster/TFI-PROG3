@@ -13,7 +13,7 @@ const ClienteService = {
         // Hashear contraseña
         const hashedPassword = await bcrypt.hash(contrasenia, 10);
 
-        const idTipoUsario = 3; // Usuario tipo Cliente (3)
+        const idTipoUsuario = 3; // Usuario tipo Cliente (3)
         const activo = 1; // Usuario activo por defecto
 
         // Crear el usuario en la base de datos

@@ -9,7 +9,7 @@ const ReclamosTipoController = {
                 return res.status(404).json({mensaje: result.mensaje});
             }
 
-            return res.status(500).json(result.data);
+            return res.status(200).json(result.data);
 
         }catch(error){
             console.error("Error en ReclamosController.getAllReclamosTipo: ", error);

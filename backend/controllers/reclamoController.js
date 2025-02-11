@@ -68,10 +68,10 @@ const ReclamoController = {
 
         try{
             const result = await ReclamoService.getReclamosPaginados(Number(page), Number(pageSize));
-            res.status(200).json(resultado);
+            res.status(200).json(result);
             
         }catch(error){
-            console.error("Error en ReclamoController.getReclamosPaginados: ", erorr);
+            console.error("Error en ReclamoController.getReclamosPaginados: ", error);
             res.status(500).json({ error: "Error al obtener los reclamos."});
         }
     },
