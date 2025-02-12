@@ -87,7 +87,7 @@ const ReclamoService = {
 
     obtenerReclamoEstado: async (idCliente) => {
         try{
-            const reclamos = await ReclamosDB.obtenerReclamosPorUsuarioDB(idCliente);
+            const reclamos = await ReclamoDB.obtenerReclamoPorUsuarioDB(idCliente);
 
             if(reclamos.length === 0){
                 throw new Error("No se encontro ningún reclamo de este cliente");

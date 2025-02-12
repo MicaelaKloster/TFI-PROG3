@@ -45,8 +45,6 @@ const estadisticas = {
         throw error; // Propaga el error para manejarlo en el controlador o servicio
       }
     },
-  
-    // Otras funciones de acceso a la base de datos...
   };
   
 export default estadisticas;

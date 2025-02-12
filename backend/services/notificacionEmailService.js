@@ -64,4 +64,5 @@ const notificacionEmail = async (reclamo, estadoReclamo) => {
 
 };
 
+
 export default notificacionEmail;
