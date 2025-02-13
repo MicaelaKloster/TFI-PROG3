@@ -46,7 +46,7 @@ const ReclamoOficinaService = {
                 throw new Error("Reclamo ya finalizado.");
             }
 
-            const resultado = await ReclamoOficinaDB.actualizarEstadoReclamoDB(idReclamo,idCliente,estadoNumerico,idEmpleado);
+            const resultado = await ReclamoOficinaDB.actualizarEstadoReclamo(idReclamo,idCliente,estadoNumerico,idEmpleado);
 
             if(resultado.affectedRows === 0){
                 throw new Error("El estado no se pudo actualizar.");
