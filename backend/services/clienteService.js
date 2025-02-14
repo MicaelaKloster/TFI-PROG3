@@ -33,7 +33,7 @@ const ClienteService = {
         const valoresActualizar = [];
 
         // Iterar sobre las propiedades del body
-        for(const [key, value] of Objectentries(datosCliente)){
+        for(const [key, value] of Object.entries(datosCliente)){
             // Verificar si el valor esta definido antes de agregarlo a la lista de actualizaciones
             if(value !== undefined){
                 if(key === 'contrasenia'){
