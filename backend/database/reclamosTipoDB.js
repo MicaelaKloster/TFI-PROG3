@@ -58,7 +58,7 @@ const ReclamosTipoDB = {
         }
     },
 
-    // Actualizar tipo de reclamo
+    // Actualizar el tipo de reclamo
     actualizarReclamoTipoDB: async (idReclamoTipo, descripcion) => {
         try{
             await pool.query("UPDATE reclamosTipo SET descripcion = ? WHERE idReclamoTipo = ?", [descripcion, idReclamoTipo]);
@@ -69,7 +69,7 @@ const ReclamosTipoDB = {
         }
     },
 
-    // Borrar tipo de reclamo
+    // Borrar (desactivar) el tipo de reclamo
     borrarReclamoTipoDB: async (idReclamoTipo) => {
         try{
             await pool.query("UPDATE reclamosTipo SET activo = 0 WHERE idReclamoTipo = ?", [idReclamoTipo]);

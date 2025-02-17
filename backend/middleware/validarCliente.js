@@ -3,7 +3,7 @@ import clienteSchema from './validaciones.js';
 const validarCliente = (req,res,next) => {
     const { error } = clienteSchema.validate(req.body);
 
-    // Si hay un error de validacion, devuelve un error 400 con detalles
+    // Si hay un error de validación, devuelve un error 400 con detalles
     if (error){
         return res.status(400).json({
             estado: "Falla",
@@ -12,7 +12,7 @@ const validarCliente = (req,res,next) => {
     }
 
     next();
-}
+};
 
 
 export default validarCliente;

@@ -5,6 +5,7 @@ import dotenv from 'dotenv';
 
 dotenv.config();
 
+// Configuración de Passport
 const initializePassport = () => {
     const options = {
         jwtFromRequest: ExtractJwt.
@@ -21,6 +22,7 @@ const initializePassport = () => {
                 if(usuario){
                     return done(null, usuario);
                 }
+                
                 return done(null, false, {message: "Usuario no encontrado"});
             }catch(error){
                 return done(error, false);

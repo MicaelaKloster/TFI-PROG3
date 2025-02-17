@@ -1,6 +1,7 @@
 import { loginService } from '../services/authService.js';
 
 const login = async (req, res) => {
+    // Inicio de sesión con correo electrónico y contraseña
     const { correoElectronico, contrasenia } = req.body;
 
     try{

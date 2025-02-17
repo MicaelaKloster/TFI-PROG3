@@ -9,7 +9,7 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 const InformeHandlebars = {
-    
+    // Crear informe en CSV
     informeReclamosCsv: async (datosReporte) => {
         let ruta = path.resolve(__dirname, '..');
         ruta = path.join(ruta, '/utiles/reclamos.csv'); 
@@ -30,10 +30,11 @@ const InformeHandlebars = {
         // genero csv
         await csvWriter.writeRecords(datosReporte);
 
-        //
+        
         return ruta;
     },
 
+    // Crear un informe en PDF
     informeReclamosPdf: async (datosReporte) => {
         try{
             const filePath = path.join(__dirname, '../utiles/handlebars/plantilla-informe.html');
@@ -42,10 +43,10 @@ const InformeHandlebars = {
             const template = handlebars.compile(htmlTemplate);
             const htmlFinal = template(datosReporte);
 
-            // lanzo puppeteer, 
+            // lanzo puppeteer 
             const browser = await puppeteer.launch();
 
-            // abrir un pagina
+            // abrir un página
             const page = await browser.newPage();
 
             // cargo la plantilla 
@@ -58,7 +59,7 @@ const InformeHandlebars = {
                 margin: {top: '10px', bottom: '10px' }
             });
 
-            // 
+            // espero a que se cierre el browser
             await browser.close();
 
             return pdfBuffer;
@@ -67,8 +68,7 @@ const InformeHandlebars = {
             console.error('Error generando el PDF:', error);
             throw error;
         }
-    }
-}
-
+    },
+};
 
 export default InformeHandlebars;

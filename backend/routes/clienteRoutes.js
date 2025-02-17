@@ -7,7 +7,7 @@ import validarCliente from '../middleware/validarCliente.js';
 
 const router = express.Router();
 
-// Rutas Cliente
+// Ruta para registar un cliente (solo accesible por usuarios autenticados y autorizados)
 router.post(
     '/crear',
     upload.single('imagen'),
@@ -15,6 +15,7 @@ router.post(
     ClienteController.crearCliente
 );
 
+// Ruta para actualizar un cliente (solo un cliente puede hacerlo)
 router.patch(
     '/actualizar',
     passport.authenticate('jwt', {session: false}),
@@ -22,9 +23,6 @@ router.patch(
     upload.single('imagen'),
     ClienteController.actualizarCliente
 );
-
-// Ruta pública para registrar un cliente
-router.post('/registro', upload.single("imagen"), ClienteController.registrarCliente);
 
 
 export default router;

@@ -2,10 +2,11 @@ import oficinas from "../database/oficinasDB.js";
 import redisClient from "../index.js";
 
 const oficinaService = {
+    // Obtener todas las oficinas activas
     getAllOficinas: async () => {
         try{
             const cacheKey = "oficinas";
-            const cachedData = await redisClient.get(cacheKey);
+            const cachedData = await redisClient.get(cacheKey); // Aguardar a redis para obtener las oficinas de la cache
 
             if (cachedData){
                 console.log("Datos obtenidos de la cache");
@@ -13,17 +14,18 @@ const oficinaService = {
             }
 
             const rows = await oficinas.getAllOficinasDB();
-            await redisClient.setEx(cacheKey, 3600, JSON.stringify(rows));
+            await redisClient.setEx(cacheKey, 3600, JSON.stringify(rows)); // Si no están en la cache, las guarda
             return rows;
         }catch(error){
             throw new Error("Error al obtener oficinas: ", error.message);
         }
     },
 
+    // Obtener empleados de una oficina
     getEmpleadosByOficina: async (idOficina) => {
         try{
             const cacheKey = `empleadosOficinas:${idOficina}`;
-            const cachedData = await redisClient.get(cacheKey);
+            const cachedData = await redisClient.get(cacheKey); // Se espera a Redis en caso de que esten en la cache
             
             if(cachedData) {
                 console.log("Datos obtenidos de la cache");
@@ -35,7 +37,7 @@ const oficinaService = {
                 throw new Error("Oficina sin empleados asignados");
             }
 
-            await redisClient.setEx(cacheKey, 3600, JSON.stringify(rows));
+            await redisClient.setEx(cacheKey, 3600, JSON.stringify(rows)); // Se guardan en cache
             return rows;
 
         }catch(error){
@@ -43,6 +45,7 @@ const oficinaService = {
         }
     },
 
+    // Asignar empleado a una oficina
     asignarEmpleadoAOficina: async (idOficina, idUsuario) => {
         try{
             // Verificar si el empleado existe y cumple las condiciones
@@ -69,6 +72,7 @@ const oficinaService = {
             if (yaAsignado) {
                 throw new Error("El empleado ya está asignado en la oficina");
             }
+
             // Agregar empleado a oficina
             const idAsignacion = await oficinas.asignarEmpleadoDB(idOficina, idUsuario);
             return idAsignacion;
@@ -78,6 +82,7 @@ const oficinaService = {
         }
     },
 
+    // Eliminación (desactivación) de un empleado de una oficina
     eliminarEmpleadoDeOficina: async (idUsuario) => {
         try{
             const result = await oficinas.eliminarEmpleadoDeOficinaDB(idUsuario);
@@ -88,5 +93,6 @@ const oficinaService = {
         }
     },
 };
+
 
 export default oficinaService;

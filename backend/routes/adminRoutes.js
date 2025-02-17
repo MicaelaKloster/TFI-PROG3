@@ -4,9 +4,11 @@ import upload from '../config/multerConfig.js';
 
 const router = express.Router();
 
-// Rutas de Admin
+// Rutas para obtener empleados y clientes
 router.get("/empleados", AdminController.getAllEmpleados);
 router.get("/clientes", AdminController.getAllClientes);
+
+// CRUD de usuarios
 router.post(
     "/usuario",
     upload.single('imagen'),
@@ -18,6 +20,8 @@ router.patch(
     AdminController.actualizarUsuario
 );
 router.put("/borrar-usuario/:idUsuario", AdminController.borrarUsuario);
+
+// Estadísticas de usuarios por oficina
 router.get('/usuarios-por-oficina', AdminController.obtenerUsuariosPorOficina);
 
 

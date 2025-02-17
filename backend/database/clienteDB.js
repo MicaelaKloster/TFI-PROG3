@@ -1,7 +1,7 @@
 import pool from "./config.js";
 
 const ClienteDB = {
-    // buscar usuario por email, nombre y apellido
+    // Buscar usuario por email, nombre y apellido
     buscarUsuarioDB: async (correoElectronico, nombre, apellido) => {
         try{
             const [usuarios] = await pool.query("SELECT * FROM usuarios WHERE correoElectronico = ? AND nombre = ? AND apellido = ?", [correoElectronico, nombre, apellido]);
@@ -42,26 +42,6 @@ const ClienteDB = {
 
         }catch(error){
             throw new Error("Error al actualizar datos del usuario: " + erorr.message);
-        }
-    },
-
-    registrarClienteDB: async (nombre, apellido, correoElectronico, contrasenia, imagen) => {
-        try{
-            const [result] = await pool.query(`INSERT INTO usuarios (nombre, apellido, correoElectronico, contrasenia, idTipoUsuario, imagen, activo) VALUES (?, ?, ?, ?, ?, ?, ?)`, [nombre, apellido, correoElectronico, contrasenia, 3, imagen, 1]);
-            return result.insertId;
-
-        }catch(error){
-            throw new Error("Error al registrar el cliente: " + error.message);
-        }
-    },
-
-    verificarCorreoDB: async (correoElectronico) => {
-        try{
-            const [rows] = await pool.query("SELECT correoElectronico FROM usuarios WHERE correoElectronico = ?", [correoElectronico]);
-            return rows.length > 0;
-            
-        }catch(error){
-            throw new Error("Error al verificar el correo electrónico: " + error.message);
         }
     },
 };

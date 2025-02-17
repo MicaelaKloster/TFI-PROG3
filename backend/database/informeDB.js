@@ -1,6 +1,7 @@
 import pool from "./config.js";
 
 const informeDB = {
+    // Datos para PDF
     buscarDatosReportePdf: async () => {
         const sql = 'CALL `datosPDF`()';
 
@@ -17,6 +18,7 @@ const informeDB = {
         return datosReporte;
     },
 
+    // Datos para CSV
     buscarDatosReporteCsv: async () => {
         const query = `SELECT r.idReclamo as 'reclamo', rt.descripcion as 'tipo', re.descripcion AS 'estado',
                      DATE_FORMAT(r.fechaCreado, '%Y-%m-%d %H:%i:%s') AS 'fechaCreado', CONCAT(u.nombre, ' ', u.apellido) AS 'cliente'
@@ -28,7 +30,7 @@ const informeDB = {
         
         const [result] = await pool.query(query);
         return result;
-    }
+    },
 };
 
 export default informeDB;

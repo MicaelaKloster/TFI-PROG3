@@ -30,6 +30,7 @@ const AdminService = {
         return this.getUsuariosByTipo(3, "clientes");
     },
 
+    // Creación del usuario
     crearUsuario: async (usuarioData) => {
         const {
             nombre,
@@ -51,7 +52,7 @@ const AdminService = {
 
             // Encriptar la contraseña
             const hashedPassword = await bcrypt.hash(contrasenia, 10);
-            const activo = 1;
+            const activo = 1; // Por defecto activo va a definirse en 1
 
             const user = {
                 nombre,
@@ -78,6 +79,7 @@ const AdminService = {
         }
     },
 
+    // Actualización de usuario
     actualizarUsuario: async (idUsuarioModificado, datosUsuario) => {
         try{
             // Obtener usuario a modificar de la base de datos
@@ -92,7 +94,7 @@ const AdminService = {
             for (const [key, value] of Object.entries(datosUsuario)){
                 if (value !== undefined){
                     if (key === 'contrasenia'){
-                        const hashedPassword = await bcrypt.hash(value, 10);
+                        const hashedPassword = await bcrypt.hash(value, 10); // Encriptar contraseña
                         camposActualizar.push(`${key} = ?`);
                         valoresActualizar.push(hashedPassword);
                     }else{
@@ -127,7 +129,7 @@ const AdminService = {
         }
     },
 
-    // Borrar usuario
+    // Borrar (desactivar) usuario
     borrarUsuario: async (idUsuario) => {
         try{
             // Obtener el usuario de la base de datos

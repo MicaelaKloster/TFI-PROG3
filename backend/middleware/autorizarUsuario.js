@@ -1,4 +1,4 @@
-// Funcion que evalua el perfil de usuario a autorizar
+// Función que evalua el perfil de usuario a autorizar
 
 export default function autorizarUsuarios (perfilAutorizados = []){
     return (req, res, next) => {

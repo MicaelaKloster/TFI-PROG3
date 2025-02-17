@@ -38,7 +38,7 @@ const ReclamoOficinaDB = {
                 query+= ', fechaCancelado = NOW()';
             }else if(estadoNumerico === 4){
                 query += ', fechaFinalizado = NOW(), idUsuarioFinalizador = ?';
-                valores.push(idEmpleado); // Agrega idEmpleado solo si esl estado es finalizado (4)
+                valores.push(idEmpleado); // Agrega el idEmpleado solo si el estado es finalizado (4)
             }
 
             query+= ' WHERE idReclamo = ? AND idUsuarioCreador = ?';

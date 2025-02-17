@@ -1,6 +1,7 @@
 import ClienteService from "../services/clienteService.js";
 
 const ClienteController = {
+    // Crear un Cliente
     crearCliente: async (req, res) => {
         const { nombre, apellido, correoElectronico, contrasenia } = req.body;
         const imagen = req.file ? req.file.filename : null; // Nombre del archivo o null si no se sube
@@ -24,6 +25,7 @@ const ClienteController = {
         }
     },
 
+    // Actualizar Cliente
     actualizarCliente: async (req, res) => {
         const { idUsuario } = req.user;
         const nuevaImagen = req.file ? req.file.filename : null;
@@ -55,26 +57,6 @@ const ClienteController = {
             }else{
                 res.status(500).json({error: `Ocurrió un error al actualizar el cliente: ${error.message}`});
             }
-        }
-    },
-
-    registrarCliente: async (req, res) => {
-        const { nombre, apellido, correoElectronico, contrasenia } = req.body;
-        const imagen = req.file ? req.file.filename : null;
-
-        try{
-            const nuevoCliente = await ClienteService.registrarCliente(
-                nombre,
-                apellido,
-                correoElectronico,
-                contrasenia,
-                imagen
-            );
-
-            res.status(200).json(nuevoCliente);
-            
-        }catch(error){
-            res.status(400).json({error: error.message});
         }
     },
 };

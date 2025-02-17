@@ -106,4 +106,5 @@ const ReclamoDB = {
     },
 };
 
+
 export default ReclamoDB;

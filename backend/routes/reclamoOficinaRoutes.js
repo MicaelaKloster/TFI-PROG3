@@ -9,7 +9,7 @@ router.get(
   ReclamoOficinaController.listarReclamosOficina,
 );
 
-// Actualizar estado de un reclamo
+// Actualizar el estado de un reclamo
 router.put(
   "/cliente/:idCliente/reclamo/:idReclamo/estado/:nuevoEstado",
   ReclamoOficinaController.ActualizarEstadoReclamo

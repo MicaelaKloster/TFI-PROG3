@@ -1,6 +1,5 @@
 import express from 'express';
 import morgan from 'morgan';
-import cors from 'cors';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import dotenv from 'dotenv';
@@ -55,7 +54,6 @@ initializePassport(passport);
 app.use(passport.initialize());
 
 // Configuración de middlewares
-app.use(cors({ origin: 'http://localhost:5173' }));  // Permitir solo este origen
 app.use(contentTypeMiddleware);                       // Verificar Content-Type application/json
 app.use(express.json());                              // Analizar JSON
 app.use(morgan('dev'));                               // Logger para desarrollo
@@ -87,5 +85,6 @@ app.use((err, req, res, next) => {
 app.listen(PORT, () => {
   console.log(`Servidor Express escuchando en el puerto ${PORT}`);
 });
+
 
 export default redisClient;

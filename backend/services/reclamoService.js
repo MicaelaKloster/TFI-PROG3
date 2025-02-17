@@ -3,6 +3,7 @@ import ReclamoDB from "../database/reclamoDB.js";
 import NotificacionEmail from "./notificacionEmailService.js";
 
 const ReclamoService = {
+    // Obtener todos los reclamos
     getAllReclamos: async () => {
         const cacheKey = "reclamos";
         const cachedData = await redisClient.get(cacheKey);
@@ -16,6 +17,7 @@ const ReclamoService = {
         return rows;
     },
 
+    // Crear un nuevo reclamo
     crearReclamo: async (asunto, descripcion, idUsuarioCreador, idReclamoTipo) => {
         try{
             if(!asunto || !descripcion || !idReclamoTipo ){
@@ -26,6 +28,7 @@ const ReclamoService = {
 
                 throw new Error(`Faltan los siguientes datos requeridos: ${errores.join(', ')}`);
             }
+
             // Verificar si ya existe el reclamo
             const existeReclamo = await ReclamoDB.buscarReclamoPorUsuarioYAsuntoDB(idUsuarioCreador, asunto);
             if(existeReclamo != null) {
@@ -33,7 +36,7 @@ const ReclamoService = {
             }
 
             const fechaCreado = new Date();
-            const idReclamoEstado = 1; // Estado inicial de un reclamo (pendiente)
+            const idReclamoEstado = 1; // Estado inicial de un reclamo (Creado)
 
             // Crear el reclamo en la base de datos
             const idReclamo = await ReclamoDB.crearReclamoDB({
@@ -61,6 +64,7 @@ const ReclamoService = {
         }
     },
 
+    // Cancelar un reclamo
     cancelarReclamo: async (idCliente, idReclamo) => {
         try{
             const reclamo = await ReclamoDB.obtenerReclamoPorClienteYReclamoDB(idCliente, idReclamo);
@@ -78,6 +82,7 @@ const ReclamoService = {
 
             const estadoValido = await ReclamoDB.obtenerEstadoReclamoPorId(3);
             
+            // Notificación al usuario por correo electrónico la cancelación del reclamo
             return await NotificacionEmail(reclamo, estadoValido.descripcion);
 
         }catch(error){
@@ -85,6 +90,7 @@ const ReclamoService = {
         }
     },
 
+    // Obtener el estado de un reclamo
     obtenerReclamoEstado: async (idCliente) => {
         try{
             const reclamos = await ReclamoDB.obtenerReclamoPorUsuarioDB(idCliente);
@@ -100,6 +106,7 @@ const ReclamoService = {
         }
     },
 
+    // Obtener reclamos páginados
     getReclamosPaginados: async (page = 1, pageSize = 10) => {
         try{
             const offset = (page - 1) * pageSize;
@@ -120,5 +127,6 @@ const ReclamoService = {
         }
     },
 };
+
 
 export default ReclamoService;

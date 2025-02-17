@@ -2,6 +2,7 @@ import InformeDB from '../database/informeDB.js';
 import InformeHandlebars from './informeHandlebars.js';
 
 const informeService = {
+    // Generar informe
     generarInforme: async function (formato) { 
         if (formato === 'pdf') {
             return await this.reportePdf(); 
@@ -12,6 +13,7 @@ const informeService = {
         }
     },
     
+    // Informe en PDF
     reportePdf: async function () { 
         const datosReporte = await InformeDB.buscarDatosReportePdf();
 
@@ -30,6 +32,7 @@ const informeService = {
         };
     },
 
+    // Informe en CSV
     reporteCsv: async function () { 
         const datosReporte = await InformeDB.buscarDatosReporteCsv();
 
@@ -46,7 +49,8 @@ const informeService = {
                 'Content-Disposition': 'attachment; filename="reporte.csv"'
             }
         };
-    }
+    },
 };
+
 
 export default informeService;

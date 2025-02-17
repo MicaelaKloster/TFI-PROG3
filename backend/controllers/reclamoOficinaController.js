@@ -1,7 +1,7 @@
 import ReclamoOficinaService from "../services/reclamoOficinaService.js";
 
-// Verificar que atienda elos reclamos de su oficina en el actualizar estado reclamo
 const ReclamoOficinaController = {
+    // Listar reclamos asociados a una oficina
     listarReclamosOficina: async (req, res) => {
         const { idUsuario } = req.user;
         try{
@@ -14,6 +14,7 @@ const ReclamoOficinaController = {
         }
     },
 
+    // Actualizar estado de un reclamo
     ActualizarEstadoReclamo: async (req, res) => {
         const { idUsuario } = req.user;
         const {idCliente, nuevoEstado, idReclamo} = req.params;
@@ -36,5 +37,6 @@ const ReclamoOficinaController = {
         }
     },
 };
+
 
 export default ReclamoOficinaController;

@@ -1,6 +1,7 @@
 import InformeService from "../services/informeService.js";
 
 const informeController = {
+    // Obtener informe
     informe: async (req, res) => {
         const formatosPermitidos = ['pdf', 'csv'];
         try{
@@ -40,5 +41,6 @@ const informeController = {
         } 
     },
 }
+
 
 export default informeController;

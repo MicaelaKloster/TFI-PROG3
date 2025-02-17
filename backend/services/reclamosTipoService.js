@@ -2,6 +2,7 @@ import ReclamosTipo from "../database/reclamosTipoDB.js";
 import redisClient from "../index.js";
 
 const ReclamosTipoService = {
+    // Obtener todos los tipos de reclamos
     getAllReclamosTipo: async () => {
         try{
             const cacheKey = "reclamosTipo"; // Definir una clave para Redis
@@ -41,6 +42,7 @@ const ReclamosTipoService = {
         }
     },
 
+    // Crear un nuevo tipo de reclamo
     crearReclamoTipo: async (descripcion) => {
         try{
             // Verificar si el reclamo ya existe
@@ -64,6 +66,7 @@ const ReclamosTipoService = {
         }
     },
 
+    // Actualizar un tipo de reclamo
     actualizarReclamoTipo: async (idReclamoTipo, descripcion) => {
         try{
             // Verificar si el reclamo tipo existe en la base de datos
@@ -92,6 +95,7 @@ const ReclamosTipoService = {
         }
     },
 
+    // Borrar (desactivar) un tipo de reclamo
     borrarReclamoTipo: async (idReclamoTipo) => {
         try{
             // Verificar si el reclamo tipo existe

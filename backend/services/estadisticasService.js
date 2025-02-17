@@ -1,6 +1,7 @@
 import estadisticas from "../database/estadisticasDB.js";
 
 const EstadisticasService = {
+  // Obtener estadísticas
   getEstadisticasCompletas: async () => {
     try {
       const resultados = await estadisticas.getEstadisticasCompletasDB();
@@ -13,6 +14,5 @@ const EstadisticasService = {
     }
   }
 };
-
 
 export default EstadisticasService;

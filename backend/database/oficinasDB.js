@@ -1,7 +1,7 @@
 import pool from "./config.js";
 
 const OficinasDB = {
-    // Función para obtener todas las oficinas
+    // Función para obtener todas las oficinas activas
     getAllOficinasDB: async () => {
         try{
             const [rows] = await pool.query("SELECT * FROM oficinas WHERE activo = 1");
@@ -60,6 +60,5 @@ const OficinasDB = {
         }
     },
 };
-
 
 export default OficinasDB;

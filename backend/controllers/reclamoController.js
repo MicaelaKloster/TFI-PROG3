@@ -2,6 +2,7 @@ import ReclamoService from "../services/reclamoService.js";
 
 
 const ReclamoController = {
+    // Obtener todos los reclamos
     getAllReclamos: async (req, res) => {
         try{
             const rows = await ReclamoService.getAllReclamos();
@@ -12,7 +13,7 @@ const ReclamoController = {
         }
     },
 
-
+    // Crear un nuevo reclamo
     crearReclamo: async (req, res) => {
         const { asunto, descripcion, idReclamoTipo } = req.body;
         const {idUsuario} = req.user;
@@ -34,6 +35,7 @@ const ReclamoController = {
         }
     },
 
+    // Cancelar un reclamo
     cancelarReclamo: async (req, res) => {
         const {idUsuario} = req.user;
         const {idReclamo } = req.params;
@@ -51,6 +53,7 @@ const ReclamoController = {
         }
     },
 
+    // Obtener estado de un reclamo
     obtenerReclamoEstado: async (req, res) => {
         const { idUsuario } = req.user;
         try{
@@ -62,6 +65,7 @@ const ReclamoController = {
         }
     },
 
+    // Obtener reclamos paginados
     getReclamosPaginados: async (req, res) => {
         // Recibe parametros de paginación
         const { page = 1, pageSize = 10 } = req.query;
@@ -76,6 +80,5 @@ const ReclamoController = {
         }
     },
 };
-
 
 export default ReclamoController;

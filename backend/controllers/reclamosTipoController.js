@@ -1,6 +1,7 @@
 import ReclamosTipoService from "../services/reclamosTipoService.js";
 
 const ReclamosTipoController = {
+    // Obtener todos los tipos de reclamos
     getAllReclamosTipo: async (req, res) => {
         try{
             const result = await ReclamosTipoService.getAllReclamosTipo();
@@ -17,6 +18,7 @@ const ReclamosTipoController = {
         }
     },
 
+    // Crear un nuevo tipo de reclamo
     crearReclamoTipo: async (req, res) => {
         const { descripcion } = req.body;
 
@@ -38,6 +40,7 @@ const ReclamosTipoController = {
         }
     },
 
+    // Actualizar un tipo de reclamo
     actualizarReclamoTipo: async (req,res) => {
         const { idReclamoTipo } = req.params;
         const { descripcion } = req.body;
@@ -52,6 +55,7 @@ const ReclamosTipoController = {
         }
     },
 
+    // Borrar (desactivar) un tipo de reclamo
     borrarReclamoTipo: async (req, res) => {
         const { idReclamoTipo } = req.params;
         try{

@@ -1,6 +1,7 @@
 import oficinaService from "../services/oficinaService.js";
 
 const OficinaController = {
+    // Obtener todas las oficinas activas
     getAllOficinas: async (req, res) => {
         try{
             const rows = await oficinaService.getAllOficinas();
@@ -11,6 +12,7 @@ const OficinaController = {
         }
     },
 
+    // Obtener empleados asignados a una oficina
     getEmpleadosByOficina: async (req, res) => {
         const { idOficina } = req.params;
         try{
@@ -23,6 +25,7 @@ const OficinaController = {
         }
     },
 
+    // Asignar un empleado a una oficina
     asignarEmpleadoAOficina: async (req,res) => {
         const { idOficina, idUsuario } = req.params;
         try{
@@ -38,6 +41,7 @@ const OficinaController = {
         }
     },
 
+    // Eliminar (desactivar) un empleado de una oficina
     eliminarEmpleadoDeOficina: async (req,res) => {
         const { idUsuario } = req.params;
         try{

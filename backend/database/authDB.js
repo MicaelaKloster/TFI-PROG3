@@ -16,6 +16,7 @@ const getUserByEmail = async (correoElectronico) => {
     }
 }
 
+// Función para obtener el usuario por su ID
 const getUserById = async (idUsuario) => {
     try{
         const [rows] = await pool.query("SELECT * FROM usuarios WHERE idUsuario = ?", [idUsuario]);
@@ -23,6 +24,7 @@ const getUserById = async (idUsuario) => {
         if(rows.length > 0){
             return rows[0]; // Retorna el primer usuario encontrado
         }
+        
         return null; // Si no se encuentra el usuario, devuelve null
 
     }catch (error){

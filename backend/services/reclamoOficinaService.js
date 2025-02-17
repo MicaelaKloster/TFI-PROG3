@@ -3,6 +3,7 @@ import NotificacionEmail from "./notificacionEmailService.js";
 import ReclamoDB from "../database/reclamoDB.js";
 
 const ReclamoOficinaService = {
+    // Listar reclamos de la oficina asignada al empleado
     listarReclamosPorOficina: async (idEmpleado) => {
         try{
             const reclamos = await ReclamoOficinaDB.obtenerReclamosPorOficinaDB(idEmpleado);
@@ -17,6 +18,7 @@ const ReclamoOficinaService = {
         }
     },
 
+    // Actualizar el estado de un reclamo
     actualizarEstadoReclamo: async (idEmpleado, idCliente, nuevoEstado, idReclamo) => {
         try{
             const estadoNumerico = parseInt(nuevoEstado,10);
@@ -52,6 +54,7 @@ const ReclamoOficinaService = {
                 throw new Error("El estado no se pudo actualizar.");
             }
 
+            // Se envía notificación vía correo electrónico de cambio de estado en el reclamo
             return await NotificacionEmail(reclamo, estadoValido.descripcion);
 
         }catch(error){

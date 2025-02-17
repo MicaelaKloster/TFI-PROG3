@@ -7,6 +7,7 @@ import { fileURLToPath } from "url";
 
 dotenv.config(); // Para cargar las variables de entorno
 
+// Notificación por correo electrónico
 const notificacionEmail = async (reclamo, estadoReclamo) => {
   // Cargar plantilla de correo electrónico
   const filename = fileURLToPath(import.meta.url);
@@ -24,7 +25,6 @@ const notificacionEmail = async (reclamo, estadoReclamo) => {
     estadoReclamo: estadoReclamo,
     asunto: reclamo.asunto,
   };
-
 
   const correoHtml = template(datos);
 
@@ -57,8 +57,8 @@ const notificacionEmail = async (reclamo, estadoReclamo) => {
       mensaje: `El estado del reclamo ha sido actualizado a ${estadoReclamo}.`,
       notificacion: "Notificación enviada correctamente.",
     };
-  }
-  catch(error){
+
+  }catch(error){
     return { estado: false, mensaje: 'Correo electrónico no enviado.' };
   }
 

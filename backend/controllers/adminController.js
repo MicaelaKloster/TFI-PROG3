@@ -1,7 +1,7 @@
 import AdminService from "../services/adminService.js";
 
 const AdminController = {
-
+    // Función para obtener todos los empleados
     getAllEmpleados: async (req,res) => {
         try{
             const empleados = await AdminService.getAllEmpleados();
@@ -12,6 +12,7 @@ const AdminController = {
         }
     },
 
+    // Función para obtener todos los clientes
     getAllClientes: async (req, res) => {
         try{
             const clientes = await AdminService.getAllClientes();
@@ -22,6 +23,7 @@ const AdminController = {
         }
     },
 
+    // Función para crear usuario
     crearUsuario: async (req, res) => {
         const {nombre, apellido, correoElectronico, contrasenia, idTipoUsuario} = req.body;
         const imagen = req.file ? req.file.filename : null; // Nombre del archivo de la imagen subida o null si no se sube
@@ -41,6 +43,7 @@ const AdminController = {
 
     },
 
+    // Función para actualizar usuario
     actualizarUsuario: async (req, res) => {
         const {idUsuarioModificado} = req.params;
         try{
@@ -64,6 +67,7 @@ const AdminController = {
         }
     },
 
+    // Función para eliminar (desactivar) un usuario
     borrarUsuario: async (req, res) => {
         const {idUsuario} = req.params;
 
@@ -81,6 +85,7 @@ const AdminController = {
         }
     },
 
+    // Función para obtener usuarios por oficina
     obtenerUsuariosPorOficina: async (req, res) => {
         try{
             const result = await AdminService.obtenerUsuariosPorOficina();
@@ -92,5 +97,6 @@ const AdminController = {
         }
     },
 };
+
 
 export default AdminController;

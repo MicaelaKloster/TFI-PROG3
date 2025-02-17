@@ -84,7 +84,7 @@ const AdminDB = {
         }
     },
 
-    // Función para eliminar empleado de oficina
+    // Función para eliminar empleado de una oficina
     eliminarEmpleadoOficinaDB: async (idUsuario) => {
         try{
             const query = 'UPDATE usuariosOficinas SET activo = 0 WHERE idUsuario = ?';
