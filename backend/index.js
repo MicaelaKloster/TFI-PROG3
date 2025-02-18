@@ -1,5 +1,6 @@
 import express from 'express';
 import morgan from 'morgan';
+import cors from 'cors';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import dotenv from 'dotenv';
@@ -54,6 +55,7 @@ initializePassport(passport);
 app.use(passport.initialize());
 
 // Configuración de middlewares
+app.use(cors());
 app.use(contentTypeMiddleware);                       // Verificar Content-Type application/json
 app.use(express.json());                              // Analizar JSON
 app.use(morgan('dev'));                               // Logger para desarrollo
