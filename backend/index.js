@@ -21,6 +21,8 @@ import routerReclamoOficina from './routes/reclamoOficinaRoutes.js';
 import routerReclamoTipo from './routes/reclamoTipoRoutes.js';
 import routerInforme from './routes/informeRoutes.js';
 import routerEstadisticas from './routes/estadisticasRoutes.js';
+import routerRepuestos from './routes/repuestosRoutes.js';
+import routerReclamosRepuestos from './routes/reclamosRepuestosRoutes.js';
 
 // Cargar variables de entorno
 dotenv.config();
@@ -48,7 +50,7 @@ redisClient.on('connect', () => {
   
 redisClient.on('error', (err) => {
     console.error('Error en Redis:', err);
-});
+}); 
 
 // Inicializa Passport
 initializePassport(passport);
@@ -70,6 +72,8 @@ app.use(`${API_VERSION}/reclamoTipos`, passport.authenticate('jwt', { session: f
 app.use(`${API_VERSION}/oficinas`, passport.authenticate('jwt', { session: false }), autorizarUsuario([1]), routerOficina);
 app.use(`${API_VERSION}/estadisticas`, passport.authenticate('jwt', { session: false }), autorizarUsuario([1]), routerEstadisticas);
 app.use(`${API_VERSION}/informes`, passport.authenticate('jwt', { session: false }), autorizarUsuario([1]), routerInforme);
+app.use(`${API_VERSION}/repuestos`, passport.authenticate('jwt', {session: false}), autorizarUsuario([2]), routerRepuestos);
+app.use(`${API_VERSION}/reclamosRepuestos`, routerReclamosRepuestos);
 
 // Servir archivos estáticos
 app.use(express.static(path.join(__dirname, 'public')));
