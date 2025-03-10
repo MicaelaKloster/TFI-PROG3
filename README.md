@@ -124,5 +124,5 @@ Para probar la API en Postman, sigue estos pasos:
 # 📜 Licencia
 Este proyecto es de código abierto y puede ser usado con fines educativos.
 
-# Autor
+# ✒️ Autor
 Micaela Kloster Quintana.
