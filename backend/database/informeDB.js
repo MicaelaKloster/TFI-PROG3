@@ -13,7 +13,7 @@ const informeDB = {
             reclamosFinalizados : result[0][0].reclamosFinalizados,
             descripcionTipoRreclamoFrecuente : result[0][0].descripcionTipoRreclamoFrecuente,
             cantidadTipoRreclamoFrecuente : result[0][0].cantidadTipoRreclamoFrecuente
-        }
+        };
 
         return datosReporte;
     },

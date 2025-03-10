@@ -34,7 +34,7 @@ const AdminDB = {
             return rows;
         }catch (error){
             console.error("Error en AdminDB.verificarCorreo: ", error);
-            throw new Error("Error al verificar el correo electrónico.")
+            throw new Error("Error al verificar el correo electrónico.");
         }
     },
 
@@ -47,7 +47,7 @@ const AdminDB = {
             return rows;
         }catch (error){
             console.error("Error en AdminDB.obtenerUsuarioPorId: ", error);
-            throw new Error("Error al obtener el usuario.")
+            throw new Error("Error al obtener el usuario.");
         }
     },
 

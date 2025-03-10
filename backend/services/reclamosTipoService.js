@@ -38,7 +38,7 @@ const ReclamosTipoService = {
 
         }catch(error){
             console.error("Error al obtener tipos de reclamos:", error);
-            throw new Error ("error al obtener reclamos Tipo: " + error.message)
+            throw new Error ("error al obtener reclamos Tipo: " + error.message);
         }
     },
 
@@ -88,7 +88,7 @@ const ReclamosTipoService = {
                 message: "Actualización de reclamo tipo con éxito",
                 id: reclamoTipo.idReclamoTipo,
                 descripcion,
-            }
+            };
 
         }catch(error){
             throw new Error("Error al actualizar reclamo tipo: ", error.message);
