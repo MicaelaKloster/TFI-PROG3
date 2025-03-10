@@ -21,14 +21,26 @@ const ReclamosRepuestosController = {
     }
   },
 
+  // obtenerRepuestoMasUtilizado: async (req, res) => {
+    // try {
+      // const repuesto = await ReclamosRepuestosService.obtenerRepuestoMasUtilizado();
+      // res.status(200).json(repuesto);
+    // } catch (error) {
+      // res.status(404).json({ error: error.message });
+    // }
+  // },
+  
+  // Obtener el/los repuestos más utilizado/s
   obtenerRepuestoMasUtilizado: async (req, res) => {
-    try {
-      const repuesto = await ReclamosRepuestosService.obtenerRepuestoMasUtilizado();
-      res.status(200).json(repuesto);
+	try {
+      const resultado = await ReclamosRepuestosService.obtenerRepuestoMasUtilizado();
+      res.status(200).json(resultado);
     } catch (error) {
-      res.status(404).json({ error: error.message });
+      console.error("Error al obtener el repuesto más utilizado:", error);
+      res.status(500).json({ error: "Error al obtener el repuesto más utilizado." });
     }
   },
 };
+
 
 export default ReclamosRepuestosController;

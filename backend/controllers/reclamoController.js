@@ -66,19 +66,37 @@ const ReclamoController = {
     },
 
     // Obtener reclamos paginados
-    getReclamosPaginados: async (req, res) => {
-        // Recibe parametros de paginación
-        const { page = 1, pageSize = 10 } = req.query;
+	
+    // getReclamosPaginados: async (req, res) => {
+        // // Recibe parametros de paginación
+        // const { page = 1, pageSize = 10 } = req.query;
 
-        try{
-            const result = await ReclamoService.getReclamosPaginados(Number(page), Number(pageSize));
-            res.status(200).json(result);
+        // try{
+            // const result = await ReclamoService.getReclamosPaginados(Number(page), Number(pageSize));
+            // res.status(200).json(result);
             
-        }catch(error){
-            console.error("Error en ReclamoController.getReclamosPaginados: ", error);
-            res.status(500).json({ error: "Error al obtener los reclamos."});
-        }
-    },
+        // }catch(error){
+            // console.error("Error en ReclamoController.getReclamosPaginados: ", error);
+            // res.status(500).json({ error: "Error al obtener los reclamos."});
+        // }
+    // },
+	
+	getReclamosPaginados: async (req, res) => {
+    const { page, pageSize } = req.query;
+
+    // Validar que page y pageSize existan y sean números
+    if (!page || !pageSize || isNaN(page) || isNaN(pageSize)) {
+      return res.status(400).json({ error: "Los parámetros 'page' y 'pageSize' son requeridos y deben ser números." });
+    }
+
+    try {
+      const resultado = await ReclamoService.getReclamosPaginados(Number(page), Number(pageSize));
+      res.status(200).json(resultado);
+    } catch (error) {
+      console.error("Error al obtener reclamos paginados:", error);
+      res.status(500).json({ error: "Error al obtener los reclamos." });
+    }
+  },
 };
 
 export default ReclamoController;

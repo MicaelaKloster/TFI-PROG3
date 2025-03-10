@@ -107,25 +107,52 @@ const ReclamoService = {
     },
 
     // Obtener reclamos páginados
-    getReclamosPaginados: async (page = 1, pageSize = 10) => {
-        try{
-            const offset = (page - 1) * pageSize;
-            const { reclamos, total } = await ReclamoDB.obtenerReclamosPaginadosDB(offset,pageSize);
-            const totalPages = Math.ceil(total / pageSize);
+    // getReclamosPaginados: async (page = 1, pageSize = 10) => {
+        // try{
+            // const offset = (page - 1) * pageSize;
+            // const { reclamos, total } = await ReclamoDB.obtenerReclamosPaginadosDB(offset,pageSize);
+            // const totalPages = Math.ceil(total / pageSize);
 
-            return {
-                page,
-                pageSize,
-                totalReclamos: total,
-                totalPages,
-                reclamos,
-            };
+            // return {
+                // page,
+                // pageSize,
+                // totalReclamos: total,
+                // totalPages,
+                // reclamos,
+            // };
             
-        }catch(error){
-            console.error("Error al obtener reclamos paginados: ", error);
-            throw new Error("No se pudo obtener la lista de reclamos.");
+        // }catch(error){
+            // console.error("Error al obtener reclamos paginados: ", error);
+            // throw new Error("No se pudo obtener la lista de reclamos.");
+        // }
+    // },
+	
+	getReclamosPaginados: async (page, pageSize) => {
+    try {
+        // Validar que page y pageSize existan y sean números válidos
+        if (!page || !pageSize || isNaN(page) || isNaN(pageSize) || page <= 0 || pageSize <= 0) {
+            throw new Error("Los parámetros 'page' y 'pageSize' son requeridos y deben ser números positivos.");
         }
-    },
+
+        const offset = (page - 1) * pageSize;
+
+        // Obtener los reclamos paginados
+        const resultado = await ReclamoDB.obtenerReclamosPaginadosDB(offset, pageSize);
+
+        return {
+            page,
+            pageSize,
+            totalReclamos: resultado.total,
+            totalPages: Math.ceil(resultado.total / pageSize),
+            reclamos: resultado.reclamos,
+        };
+
+    } catch (error) {
+        console.error("Error al obtener reclamos paginados:", error);
+        throw new Error("No se pudo obtener la lista de reclamos.");
+    }
+},
+
 };
 
 

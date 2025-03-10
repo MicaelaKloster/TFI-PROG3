@@ -29,23 +29,48 @@ const ReclamosRepuestosDB = {
 	},
 	
 	// Obtener el repuesto más utilizado
-	obtenerRepuestoMasUtilizadoDB: async () => {
-		try{
-			const query = `SELECT r.idRepuesto, r.nombre, COUNT(rr.idRepuesto) AS cantidadUso
-							FROM reclamosRepuestos rr
-							JOIN repuestos r ON rr.idRepuesto=r.idRepuesto
-							GROUP BY r.idRepuesto, r.nombre
-							ORDER BY cantidadUso DESC 
-							LIMIT 1`;
+	// obtenerRepuestoMasUtilizadoDB: async () => {
+		// try{
+			// const query = `SELECT r.idRepuesto, r.nombre, COUNT(rr.idRepuesto) AS cantidadUso
+							// FROM reclamosRepuestos rr
+							// JOIN repuestos r ON rr.idRepuesto=r.idRepuesto
+							// GROUP BY r.idRepuesto, r.nombre
+							// ORDER BY cantidadUso DESC 
+							// LIMIT 1`;
 							
-			const [[result]] = await pool.query(query);
+			// const [[result]] = await pool.query(query);
 
-			return repuesto || null;
-		}catch(error){
-			console.error("Errror al obtener el repuesto más utilizado: ", error);
-			throw new Error("No se pudo obtener el repuesto más utilizado.");
+			// return result || null;
+		// }catch(error){
+			// console.error("Errror al obtener el repuesto más utilizado: ", error);
+			// throw new Error("No se pudo obtener el repuesto más utilizado.");
+		// }
+	// },
+	
+	// Obtener el/los repuestos más utilizado/s
+	obtenerRepuestoMasUtilizadoDB: async () => {
+		try {
+		  const consulta = `
+			SELECT rr.idRepuesto, r.nombre, COUNT(rr.idRepuesto) AS cantidadUsos
+			FROM reclamosRepuestos rr
+			JOIN repuestos r ON rr.idRepuesto = r.idRepuesto
+			GROUP BY rr.idRepuesto, r.nombre
+			HAVING cantidadUsos = (
+			  SELECT MAX(cantidadUsos)
+			  FROM (
+				SELECT COUNT(idRepuesto) AS cantidadUsos FROM reclamosRepuestos GROUP BY idRepuesto
+			  ) AS subconsulta
+			);
+		  `;
+
+		  const [resultado] = await pool.query(consulta);
+		  return resultado;
+		} catch (error) {
+		  console.error("Error al obtener el repuesto más utilizado:", error);
+		  throw error;
 		}
 	},
 };
+
 
 export default ReclamosRepuestosDB;
