@@ -23,6 +23,7 @@ import routerInforme from './routes/informeRoutes.js';
 import routerEstadisticas from './routes/estadisticasRoutes.js';
 import routerRepuestos from './routes/repuestosRoutes.js';
 import routerReclamosRepuestos from './routes/reclamosRepuestosRoutes.js';
+import routerVehiculos from './routes/vehiculoRoutes.js';
 
 // Cargar variables de entorno
 dotenv.config();
@@ -67,13 +68,14 @@ app.use(`${API_VERSION}/auth`, authRouter);
 app.use(`${API_VERSION}/clientes`, routerCliente);
 app.use(`${API_VERSION}/admins`, passport.authenticate('jwt', { session: false }), autorizarUsuario([1]), routerAdmin);
 app.use(`${API_VERSION}/reclamoOficinas`, passport.authenticate('jwt', { session: false }), autorizarUsuario([2]), routerReclamoOficina);
-app.use(`${API_VERSION}/reclamos`, passport.authenticate('jwt', { session: false }), autorizarUsuario([3]), routerReclamo);
+app.use(`${API_VERSION}/reclamos`, routerReclamo);
 app.use(`${API_VERSION}/reclamoTipos`, passport.authenticate('jwt', { session: false }), autorizarUsuario([1]), routerReclamoTipo);
 app.use(`${API_VERSION}/oficinas`, passport.authenticate('jwt', { session: false }), autorizarUsuario([1]), routerOficina);
 app.use(`${API_VERSION}/estadisticas`, passport.authenticate('jwt', { session: false }), autorizarUsuario([1]), routerEstadisticas);
 app.use(`${API_VERSION}/informes`, passport.authenticate('jwt', { session: false }), autorizarUsuario([1]), routerInforme);
 app.use(`${API_VERSION}/repuestos`, passport.authenticate('jwt', {session: false}), autorizarUsuario([2]), routerRepuestos);
 app.use(`${API_VERSION}/reclamosRepuestos`, routerReclamosRepuestos);
+app.use(`${API_VERSION}/vehiculos`, passport.authenticate('jwt', {session: false}), autorizarUsuario([2]), routerVehiculos);
 
 // Servir archivos estáticos
 app.use(express.static(path.join(__dirname, 'public')));

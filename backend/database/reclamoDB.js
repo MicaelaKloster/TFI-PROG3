@@ -104,6 +104,24 @@ const ReclamoDB = {
             throw error;
         }
     },
+	
+	// Vehiculos
+	obtenerVehiculosPorTipoReclamoDB: async () => {
+		try {
+			const [rows] = await pool.query(`
+				SELECT rt.descripcion AS tipoReclamo, v.marca, v.modelo, v.patente
+				FROM reclamos r
+				JOIN vehiculos v ON r.idVehiculo = v.idVehiculo
+				JOIN reclamostipo rt ON r.idReclamoTipo = rt.idReclamoTipo
+				GROUP BY rt.descripcion, v.marca, v.modelo, v.patente
+				ORDER BY rt.descripcion;
+			`);
+			return rows;
+		} catch (error) {
+			console.error("Error al obtener vehículos por tipo de reclamo:", error);
+			throw error;
+		}
+	},
 };
 
 
