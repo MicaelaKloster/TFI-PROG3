@@ -52,7 +52,7 @@ const AdminController = {
             const datosUsuario = {
                 ...req.body,
                 ...(nuevaImagen && {imagen: nuevaImagen}), // Agregar imagen solo si existe
-            }
+            };
 
             const result = await AdminService.actualizarUsuario(idUsuarioModificado, datosUsuario);
 

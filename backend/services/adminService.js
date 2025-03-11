@@ -47,7 +47,7 @@ const AdminService = {
 
             // Llamar a la función de verificación
             if (rows.length > 0){
-                throw new Error("El usuario ya está registrado.")
+                throw new Error("El usuario ya está registrado.");
             }
 
             // Encriptar la contraseña
@@ -176,7 +176,7 @@ const AdminService = {
             return{
                 datosOficinas: datos.lenght,
                 oficinas: datos,
-            }
+            };
             
         }catch(error){
             console.error("Error en AdminService.obtenerUsuariosPorOficina: ", error);

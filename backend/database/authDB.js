@@ -14,7 +14,7 @@ const getUserByEmail = async (correoElectronico) => {
         console.error("Error al obtener usuario por correo: ", error);
         throw error;
     }
-}
+};
 
 // Función para obtener el usuario por su ID
 const getUserById = async (idUsuario) => {

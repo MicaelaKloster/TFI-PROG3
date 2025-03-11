@@ -7,8 +7,8 @@ export default function autorizarUsuarios (perfilAutorizados = []){
             return res.status(403).json({
                 estado: "falla",
                 mensaje: "Acceso denegado."
-            })
+            });
         }
         next(); // continua
-    }
+    };
 }
